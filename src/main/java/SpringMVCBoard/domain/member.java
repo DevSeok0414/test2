@@ -1,4 +1,4 @@
-package com.devseok0414.SpringMVCBoard.domain;
+package SpringMVCBoard.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

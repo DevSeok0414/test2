@@ -1,18 +1,16 @@
-package com.devseok0414.SpringMVCBoard.domain;
+package SpringMVCBoard.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Date;
-
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class recommend {
+public class image {
     private String id;
     private String board_id;
-    private String member_id;
-    private String content;
-    private Date comment_date;
+    private int number;
+    private String name;
+    private String size;
 }

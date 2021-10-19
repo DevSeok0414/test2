@@ -1,4 +1,4 @@
-package com.devseok0414.SpringMVCBoard;
+package SpringMVCBoard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
