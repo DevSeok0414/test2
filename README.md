@@ -9,8 +9,8 @@
 ---
 ### 1. 개발 목적
 
-- 학원에서 진행한 JSP MVC 프로젝트로는 부족하다고 느껴서 Spring FrameWork를 개인적으로 더 공부하여 MVC Project를 진행함.
-- 게시판에 여러 기능을 추가해서 보다 깊이 있게 Spring MVC를 학습해보고자 함
+- 학원에서 학습한 JSP MVC 외에 개인적으로 학습한 Spring FrameWork를 MVC Board를 통해서 실제로 사용해보면서 익히려고 MVC Project를 진행함
+- 학원에서 배운 게시판의 기능과 더불어 개인적으로 추가해보고 싶은 기능을 구현해보고자 함
 ---
 ### 2. 개발 환경
 
@@ -19,7 +19,7 @@
 - bootstrap 5.1.2
 - thymeleaf
 - MySQL
-- JPA
+- myBatis
 - Gradle
 - IntelliJ 2021-02(Ultimate Edition)
 
