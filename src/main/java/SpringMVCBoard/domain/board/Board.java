@@ -1,4 +1,4 @@
-package SpringMVCBoard.domain;
+package SpringMVCBoard.domain.board;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Getter  @Setter
 @ToString @NoArgsConstructor
-public class board {
+public class Board {
     private String id;
     private String member_id;
     private String title;

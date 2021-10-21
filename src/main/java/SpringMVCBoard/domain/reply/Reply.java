@@ -1,4 +1,4 @@
-package SpringMVCBoard.domain;
+package SpringMVCBoard.domain.reply;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,11 +9,12 @@ import java.util.Date;
 
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class comment {
+public class Reply {
     private String id;
     private String board_id;
-    private String member_id;
+    private String comment_id;
+    private String reply_id;
     private String content;
-    private Date comment_date;
+    private Date reply_date;
 
 }
