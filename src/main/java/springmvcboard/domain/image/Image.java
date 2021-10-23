@@ -1,4 +1,4 @@
-package SpringMVCBoard.domain.image;
+package springmvcboard.domain.image;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package SpringMVCBoard.domain.board;
+package springmvcboard.domain.reply;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,13 +7,14 @@ import lombok.ToString;
 
 import java.util.Date;
 
-@Getter  @Setter
+@Getter @Setter
 @ToString @NoArgsConstructor
-public class Board {
+public class Reply {
     private String id;
-    private String member_id;
-    private String title;
+    private String board_id;
+    private String comment_id;
+    private String reply_id;
     private String content;
-    private int hit;
-    private Date write_date;
+    private Date reply_date;
+
 }

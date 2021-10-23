@@ -1,4 +1,4 @@
-package SpringMVCBoard.domain.member;
+package springmvcboard.domain.member;
 
 import lombok.*;
 import org.springframework.stereotype.Component;
@@ -9,6 +9,8 @@ import java.util.Date;
 
 @Component
 @Getter @Setter @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member {
 
     @NotBlank
@@ -31,15 +33,4 @@ public class Member {
         this.userId = userId;
     }
 
-    public Member(String userId, String password, String passwordCheck, String name, String gender, Date birth, String email, String phone, Date signupDate) {
-        this.userId = userId;
-        this.password = password;
-        this.passwordCheck = passwordCheck;
-        this.name = name;
-        this.gender = gender;
-        this.birth = birth;
-        this.email = email;
-        this.phone = phone;
-        this.signupDate = signupDate;
-    }
 }

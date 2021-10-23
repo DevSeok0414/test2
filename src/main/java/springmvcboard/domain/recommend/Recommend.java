@@ -1,4 +1,4 @@
-package SpringMVCBoard.domain.comment;
+package springmvcboard.domain.recommend;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,11 +9,10 @@ import java.util.Date;
 
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class Comment {
+public class Recommend {
     private String id;
     private String board_id;
     private String member_id;
     private String content;
     private Date comment_date;
-
 }
