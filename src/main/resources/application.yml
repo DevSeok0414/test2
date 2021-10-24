@@ -1,7 +1,33 @@
-# MySql
 spring:
+# MySql
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/spring_mvc?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
     username: seok
     password: "*tjswn*452"
+#
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+
+  # mail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# myBatis
+mybatis:
+  mapper-locations: mybatis-mapper/**/*.xml
+
+# mapper 로그레벨
+logging:
+  level:
+    com:
+      azurealstn:
+        codespringweb:
+          mapper: TRACE

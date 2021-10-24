@@ -9,9 +9,9 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
+/*	compileOnly {
 		extendsFrom annotationProcessor
-	}
+	}*/
 }
 
 repositories {
@@ -24,9 +24,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-	compileOnly 'org.projectlombok:lombok'
-	compileOnly 'mysql:mysql-connector-java'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation 'org.projectlombok:lombok'
+	implementation 'mysql:mysql-connector-java'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-devtools'
+
 	annotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 

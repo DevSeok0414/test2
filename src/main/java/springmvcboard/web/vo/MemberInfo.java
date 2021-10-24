@@ -20,25 +20,31 @@ public class MemberInfo implements UserDetails {
     private String email;
     private String phone;
     private Date signupDate;
+    Collection<? extends GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return userId;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
@@ -48,6 +54,6 @@ public class MemberInfo implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

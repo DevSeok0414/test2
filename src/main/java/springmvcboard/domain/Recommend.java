@@ -1,4 +1,4 @@
-package springmvcboard.domain.recommend;
+package springmvcboard.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

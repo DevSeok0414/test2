@@ -1,6 +1,7 @@
-package springmvcboard.domain.member;
+package springmvcboard.domain;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Email;
@@ -22,6 +23,7 @@ public class Member {
     @NotBlank
     private String name;
     private String gender;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
     @Email
     @NotBlank

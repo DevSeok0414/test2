@@ -1,7 +1,8 @@
-package springmvcboard.domain.member;
+package springmvcboard.domain;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import springmvcboard.domain.Member;
 
 import java.util.ArrayList;
 import java.util.HashMap;
