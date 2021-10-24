@@ -2,7 +2,9 @@ package springmvcboard.web.board;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.mail.SimpleMailMessage;
@@ -10,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.bind.annotation.ResponseBody;
 import springmvcboard.image.ImageStore;
 import springmvcboard.service.board.BoardServiceImpl;
+import springmvcboard.web.vo.MemberInfo;
 
 import java.util.Random;
 
@@ -23,10 +26,15 @@ public class BoardController {
     private final JavaMailSenderImpl mailSender;
 
     @RequestMapping("/list")
-    public String list() {
-
+    public String list(Model model,
+                       @AuthenticationPrincipal MemberInfo loginMember) {
+        if(loginMember != null) {
+            model.addAttribute("loginMember", loginMember);
+        }
         return "board/list";
     }
+
+
 
 
 

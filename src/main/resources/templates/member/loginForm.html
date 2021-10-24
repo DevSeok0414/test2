@@ -16,7 +16,7 @@
 <body>
 
 <div class="container">
-<form th:action="@{/login/auth}" method="POST">
+<form name="loginForm" th:action="@{/login/auth}">
 
     <div class="py-5 text-center">
         <h2>모두의 하루</h2>
@@ -25,7 +25,7 @@
     <h4>로그인</h4>
 
     <div>
-        <input type="text"id="userId" name="userId" class="form-control" placeholder="로그인 ID">
+        <input type="text" id="userId" name="userId" class="form-control" placeholder="로그인 ID">
     </div>
 
     <br>
@@ -39,14 +39,14 @@
 
     <div class="row">
         <div class="col">
-            <button class="w-100 btn btn-success btn-lg" type="submit">
+            <button class="w-100 btn btn-success btn-lg" onclick="login();">
                 로그인
             </button>
         </div>
 
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg"
-                    th:onclick="|location.href='@{/signup}'|">회원가입
+                    th:onclick="|location.href='@{/signup}'|" type="button">회원가입
             </button>
         </div>
     </div>
@@ -66,4 +66,12 @@
 </div>  <!-- /container -->
 
 </body>
+
+<script type="text/javascript">
+    function login() {
+        document.loginForm.method="post";
+        document.loginForm.submit();
+    }
+
+</script>
 </html>
