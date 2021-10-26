@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
+<body th:fragment="header">
+<div>
+    <a th:href="@{/logout}"></a>
+    <span style="float: right">
+            <span sec:authorize="isAuthenticated()">
+                <span th:text="|${loginMember.name}(${loginMember.userId})님|">사용자명</span>
+                <button th:if="${loginMember != null}" th:onclick="|location.href='@{/logout}'|" class="btn btn-primary" style="font-size: 14px">로그아웃</button>
+          </span>
+      </span>
+</div>
 </body>
+</head>
 </html>

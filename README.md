@@ -16,10 +16,10 @@
 
 - Java 11
 - Spring Boot 2.5.5
-- bootstrap 5.1.2
+- bootstrap 5.1.3
 - thymeleaf
 - MySQL
-- myBatis
+- MyBatis
 - Gradle
 - IntelliJ 2021-02(Ultimate Edition)
 
@@ -34,5 +34,9 @@
 
 ---
 ### 5. 프로젝트 회고
+
+느낀점
+- .
+
 프로젝트 개발 일기
 - https://devseok0414.tistory.com/category/프로젝트%20개발%20일기

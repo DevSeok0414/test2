@@ -2,7 +2,19 @@
     background-color: #6aa84f;
     border-color: #3a7593;
 }
-.btn-primaryr{
+
+.btn-primary{
     background-color: #3d85c6;
     border-color: #3a7593;
 }
+
+.field-error {
+    border-color: #FF0000;
+    color: #FF0000;
+    font-size: 14px;
+    animation: blink 0.8s;
+    animation-iteration-count: 3;
+    animation-delay: 0.2s;
+}
+
+@keyframes blink {40% { border-color: white; color:white }  }

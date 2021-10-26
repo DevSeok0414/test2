@@ -4,6 +4,9 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/css/custom.css}" rel="stylesheet" />
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <style>
         .container {
             width: 40%;
@@ -23,17 +26,24 @@
 
     <form th:object="${member}" th:action="@{/signup}" method="POST" id="signupForm" class="form-horizontal">
 
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+               th:text="${err}">전체 오류 메시지</p>
+        </div>
+
         <div class="form-group row">
             <label class="col-form-label col-4">로그인 ID*</label>
             <div class="col-8">
-                <input type="text" th:field="*{userId}" class="form-control form-control-sm col-8" maxlength=30 />
+                <input type="text" th:field="*{userId}" th:errorclass="field-error" class="form-control form-control-sm col-8" maxlength=30 />
+                <div class="field-error" th:errors="*{userId}">아이디 error</div>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-4">비밀번호*</label>
             <div class="col-8">
-                <input type="password" th:field="*{password}" class="form-control form-control-sm col-8" maxlength=30 />
+                <input type="password" th:field="*{password}" th:errorclass="field-error" class="form-control form-control-sm col-8" maxlength=30 />
+                <div class="field-error" th:errors="*{password}">비밀번호 error</div>
             </div>
         </div>
 
@@ -41,20 +51,32 @@
             <label class="col-form-label col-4">비밀번호 확인*</label>
             <div class="col-8">
                 <input type="password" id="passwordCheck" name="passwordCheck" class="form-control form-control-sm col-8" maxlength=30 />
+                <span style="float: right;font-size: 14px;color: red" id="notEqual"></span>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-4">이름*</label>
             <div class="col-8">
-                <input type="text" th:field="*{name}" class="form-control form-control-sm col-8" maxlength=30 />
+                <input type="text" th:field="*{name}" th:errorclass="field-error" class="form-control form-control-sm col-8" maxlength=30 />
+                <div class="field-error" th:errors="*{name}">이름 error</div>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-4">이메일*</label>
             <div class="col-8">
-                <input type="email" th:field="*{email}" class="form-control form-control-sm col-8" maxlength=30 />
+                <input type="email" th:field="*{email}" th:errorclass="field-error" class="form-control form-control-sm col-8" maxlength=30 />
+                <span style="float: right;font-size: 14px;color: red" id="nonValidated"></span>
+                <div class="field-error" th:errors="*{email}">이메일 error</div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <button type="button" class="btn btn-primary btn-sm col-from-label col-4"
+                    id="emailButton" onclick="sendMail()">인증번호 전송</button>
+            <div class="col-8">
+                <input type="text" id="valid" class="form-control form-control-sm col-8" disabled>
             </div>
         </div>
 
@@ -75,7 +97,7 @@
         <div class="form-group row">
             <label class="col-form-label col-4">생년월일</label>
             <div class="col-8">
-                <input type="date" th:field="*{birth}" class="form-control form-control-sm col-8" maxlength=30 />
+                <input type="date" id="birth" th:field="*{birth}" class="form-control form-control-sm col-8" maxlength=30 />
             </div>
         </div>
 
@@ -109,9 +131,80 @@
 
 <script type="text/javascript">
 
+    var emailValidated = 0;
+
     function signup() {
-        document.getElementById('signupForm').submit();
+        var p1 = document.getElementById('password').value;
+        var p2 = document.getElementById('passwordCheck').value;
+
+        if($('#password').hasClass('field-error')){
+            $('#password').removeClass('field-error');
+            $('#passwordCheck').removeClass('field-error');
+        }
+
+        if(emailValidated == 0) {
+            $('#email').addClass('field-error');
+            document.getElementById('nonValidated').innerText='이메일 인증은 필수사항입니다.';
+            return;
+        }
+
+        if(p1 != p2) {
+            document.getElementById('password').classList.add('field-error');
+            document.getElementById('passwordCheck').classList.add('field-error');
+            document.getElementById('notEqual').innerText='비밀번호가 다릅니다.';
+        } else {
+            document.getElementById('password').classList.remove('field-error');
+            document.getElementById('passwordCheck').classList.remove('field-error');
+            document.getElementById('notEqual').innerText='';
+            document.getElementById('signupForm').submit();
+        }
     }
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+
+    function sendMail(){
+        var to = $('#email').val()
+        var mailData = {
+            to : to,
+        }
+        var jsonData = JSON.stringify(mailData);
+        $.ajax({
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header,token);
+            },
+            type: 'post',
+            url: '/board/sendMail',
+            data: jsonData,
+            contentType: 'application/json; charset-utf-8',
+            dataType: 'text',
+            success: function (data){
+                    alert('이메일로 인증번호를 발송했습니다.');
+                    $('#valid').removeAttr("disabled");
+                    $('#emailButton').text('확인');
+                    $('#emailButton').removeAttr("onclick");
+                    $('#emailButton').attr("onclick", "validConfirm("+data+");");
+                },
+            error: function(request,status,error) {
+                    alert('이메일 전송 실패');
+            }
+        })
+    }
+
+    function validConfirm(obj){
+        var input = $('#valid').val();
+        if(input == obj){
+            $('#emailButton').removeAttr("onclick")
+            $('#emailButton').attr("onclick", "alert(\'이미 인증되었습니다\')");
+            $('#valid').val('인증되었습니다.');
+            $('#valid').attr("disabled","");
+            emailValidated = 1;
+        }else{
+            alert("인증번호를 다시 확인해주세요.");
+        }
+
+    }
+
 
 </script>
 </html>

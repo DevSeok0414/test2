@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/custom.css}" rel="stylesheet" />
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Spring MVC Board</title>
 </head>
 <body>
-list.html
+
+<div class="container" style="max-width: 1100px; min-width: 600px" id="bodyContainer">
+    <br>
+    <div th:replace="fragment/header :: header">
+    </div>
+    <div class="py-5 text-center">
+        <h2><a style="text-decoration: none" th:href="@{/board/list}">게시판</a></h2>
+    </div>
+    <hr class="my-4">
+    <div id="boardTable">
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="width: 7%">#</th>
+                    <th style="width: 70%">제목</th>
+                    <th style="width: 14%">글쓴이</th>
+                    <th style="width: 9%">조회수</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary float-end"
+                        th:onclick="|location.href='@{/board/write}'|" type="button">글쓰기</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
 </body>
 </html>

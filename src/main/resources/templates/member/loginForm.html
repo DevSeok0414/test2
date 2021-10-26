@@ -4,19 +4,19 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/css/custom.css}" rel="stylesheet" />
-    <style>
-        .container {
-            width: 40%;
-            max-width: 800px;
-            min-width: 400px;
-        }
-    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
     <title>Spring MVC Board</title>
 </head>
 <body>
 
-<div class="container">
-<form name="loginForm" th:action="@{/login/auth}">
+<div class="container" style="width: 600px">
+<form name="loginForm" th:object="${memberInfo}" th:action="@{/login/auth}" method="post">
+
+    <div th:if="${#fields.hasGlobalErrors()}">
+        <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+           th:text="${err}">전체 오류 메시지</p>
+    </div>
 
     <div class="py-5 text-center">
         <h2>모두의 하루</h2>
@@ -24,17 +24,29 @@
 
     <h4>로그인</h4>
 
+    <br>
+
     <div>
-        <input type="text" id="userId" name="userId" class="form-control" placeholder="로그인 ID">
+        <input type="text" id="userId" th:field="*{userId}" th:errorclass="field-error"
+               class="form-control" placeholder="로그인 ID" maxlength=30 />
+        <div class="field-error" th:errors="*{userId}">아이디</div>
     </div>
 
     <br>
 
     <div>
-        <input type="password" id="password" name="password" class="form-control" placeholder="비밀번호">
+        <input type="password" id="password" th:field="*{password}" th:errorclass="field-error"
+               class="form-control" placeholder="비밀번호" maxlength=30 />
+        <div class="field-error" th:errors="*{password}"></div>
     </div>
 
+    <br>
     <hr>
+
+    <div class="field-error" th:if="${error==1}" style="text-align: center;">
+        아이디 혹은 비밀번호를 다시 확인해주세요.
+    </div>
+
     <br>
 
     <div class="row">
@@ -69,8 +81,16 @@
 
 <script type="text/javascript">
     function login() {
-        document.loginForm.method="post";
-        document.loginForm.submit();
+        var id = document.getElementById('userId').value;
+        var password = document.getElementById('password').value;
+
+        if((id == "" && password == "") || (id == null && password == null)) {
+            alert('공백이라고!!!!!!!!!!!!!!!!!!!1')
+            location.href= "member/login"
+            return;
+        } else if (!((id == "" && password == "") || (id == null && password == null))){
+            document.loginForm.submit();
+        }
     }
 
 </script>
